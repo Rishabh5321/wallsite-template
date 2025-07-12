@@ -1,0 +1,325 @@
+.basicLightbox {
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.8);
+	opacity: 0.01;
+	transition: opacity 0.4s ease;
+	z-index: 1000;
+}
+
+.basicLightbox--visible {
+	opacity: 1;
+}
+
+.basicLightbox__placeholder {
+	max-width: 100%;
+	transform: scale(0.9);
+	transition: transform 0.4s ease;
+	z-index: 1;
+}
+
+.basicLightbox__placeholder > iframe:first-child:last-child,
+.basicLightbox__placeholder > img:first-child:last-child,
+.basicLightbox__placeholder > video:first-child:last-child {
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	margin: auto;
+	max-width: 95%;
+	max-height: 95%;
+}
+
+.basicLightbox__placeholder > iframe:first-child:last-child,
+.basicLightbox__placeholder > video:first-child:last-child {
+	pointer-events: auto;
+}
+
+.basicLightbox__placeholder > img:first-child:last-child,
+.basicLightbox__placeholder > video:first-child:last-child {
+	width: auto;
+	height: auto;
+}
+
+.basicLightbox--iframe .basicLightbox__placeholder,
+.basicLightbox--img .basicLightbox__placeholder,
+.basicLightbox--video .basicLightbox__placeholder {
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+}
+
+.basicLightbox--visible .basicLightbox__placeholder {
+	transform: scale(1);
+}
+
+.lightbox-content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.lightbox-details {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease;
+    z-index: 1001;
+}
+
+.basicLightbox--visible .lightbox-details {
+    transform: translateY(0);
+}
+
+.wallpaper-info {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.wallpaper-name {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.wallpaper-resolution {
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+.lightbox-actions {
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .lightbox-actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .lightbox-favorite-btn {
+        margin-right: 0;
+        margin-bottom: 10px; /* Add some space between stacked buttons */
+    }
+}
+
+.lightbox-favorite-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-favorite-btn .icon {
+    width: 24px;
+    height: 24px;
+    fill: white;
+    transition: fill 0.3s ease, transform 0.2s ease;
+}
+
+.lightbox-favorite-btn:hover .icon {
+    transform: scale(1.1);
+}
+
+.lightbox-favorite-btn.favorited .icon {
+    fill: var(--accent-color);
+}
+
+.download-btn {
+    padding: 10px 20px;
+    background-color: var(--primary-button-bg);
+    color: var(--primary-button-text);
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 500;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.download-btn:hover {
+    transform: scale(1.05);
+}
+
+.lightbox-prev,
+.lightbox-next {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    border: none;
+    font-size: 2.5rem;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+    background: rgba(0, 0, 0, 0.6);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.lightbox-prev {
+    left: 20px;
+}
+
+.lightbox-next {
+    right: 20px;
+}
+
+.lightbox-content img {
+    max-width: 95vw;
+    max-height: 95vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    opacity: 1;
+    transition:
+        opacity 0.4s ease-in-out,
+        transform 0.4s ease,
+        filter 0.4s ease;
+}
+
+.loader {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid var(--accent-color);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1.5s linear infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -30px;
+    margin-left: -30px;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.lightbox-content.loading .loader {
+    opacity: 1;
+}
+
+.lightbox-content.loading img {
+    transform: scale(1.02);
+    filter: blur(5px);
+    opacity: 0.8;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+    .lightbox-main-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        height: 100%; /* Ensure it takes full height of basicLightbox */
+        justify-content: center; /* Center content vertically */
+    }
+
+    .lightbox-content { /* Add this block */
+        flex-grow: 1; /* Allow content to take available space */
+        display: flex; /* Make it a flex container to center image */
+        justify-content: center;
+        align-items: center;
+        overflow: hidden; /* Hide overflow if image is too big */
+        width: 100%; /* Ensure it takes full width */
+    }
+
+    .lightbox-details {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 12px;
+        position: fixed; /* Changed from relative to fixed */
+        bottom: 0; /* Ensure it's at the bottom */
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.8);
+        transform: none;
+        width: 100%; /* Take full width */
+        box-sizing: border-box; /* Include padding in width */
+    }
+
+    .wallpaper-name {
+        font-size: 1em;
+    }
+
+    .wallpaper-resolution {
+        font-size: 0.8em;
+    }
+
+    .download-btn {
+        margin-top: 10px;
+        padding: 8px 14px;
+        font-size: 0.9em;
+    }
+
+    .lightbox-prev,
+    .lightbox-next {
+        font-size: 1.5rem;
+        width: 40px;
+        height: 40px;
+        top: 45%;
+    }
+
+    .lightbox-prev {
+        left: 10px;
+    }
+
+    .lightbox-next {
+        right: 10px;
+    }
+
+    .lightbox-content img {
+        max-width: 95vw;
+        max-height: 95vh; /* Reverted to 95vh as lightbox-details is now truly fixed */
+        object-fit: contain;
+        border-radius: 8px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        opacity: 1;
+        transition:
+            opacity 0.4s ease-in-out,
+            transform 0.4s ease,
+            filter 0.4s ease;
+    }
+}

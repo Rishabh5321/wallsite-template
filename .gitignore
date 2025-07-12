@@ -1,0 +1,7 @@
+# build output
+public/
+.direnv/
+target
+result
+node_modules/
+.vercel
