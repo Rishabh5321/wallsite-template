@@ -1,4 +1,0 @@
-/webp/**/*.webp
-  Cache-Control: public, max-age=31536000, immutable
-/lqip/**/*.webp
-  Cache-Control: public, max-age=31536000, immutable
