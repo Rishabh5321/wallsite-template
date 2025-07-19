@@ -13,27 +13,46 @@ You can view the live wallpaper gallery hosted from this repository here: **[Liv
 
 The following diagram illustrates the project's architecture and the relationship between the development repository (`wallsite`) and the user-facing template (`wallsite-template`).
 
-```mermaid
+%% ------------- THEME & LAYOUT -------------
+%% Title & styling
+%% -------------------------------
 graph TD
-    subgraph "Development Repository (wallsite)"
-        A[Developer's Wallpapers in /src] --> B{pnpm run build};
-        B --> C[Generates Gallery & Assets];
-        C --> D[Live Demo on Vercel];
-        B --> E{GitHub Actions};
-        E --> F[Sync to Template];
-        E --> G[Publish Docker Image];
+    classDef repo    fill:#1f2937,stroke:#4b5563,color:#ffffff
+    classDef user    fill:#065f46,stroke:#047857,color:#ffffff
+    classDef action  fill:#7c2d12,stroke:#9a3412,color:#ffffff
+    classDef output  fill:#4338ca,stroke:#3730a3,color:#ffffff
+    classDef sync    fill:#0f766e,stroke:#0d9488,color:#ffffff
+
+    %% ------------- DEVELOPMENT REPO -------------
+    subgraph "wallsite (main repo)"
+        direction LR
+        A[Developer wallpapers<br>/src]:::repo
+        B[pnpm run build]:::action
+        C[Gallery assets<br>optimized]:::output
+        D[Live demo<br>wallsite.vercel.app]:::output
+        E[GitHub Actions]:::action
+        F["Docker image<br>ghcr.io/rishabh5321/wallsite:latest"]:::output
+        G[Sync commits to<br>template repo]:::sync
+
+        A --> B --> C
+        C --> D
+        B --> E
+        E --> F
+        E --> G
     end
 
-    subgraph "User-Facing Template (wallsite-template)"
-        H[Empty /src Folder];
-        I[User Generates Repository];
-        I --> J[Adds Their Own Wallpapers];
-        J --> K{Deploy to Vercel/Netlify or Self-Host};
+    %% ------------- USER TEMPLATE -------------
+    subgraph "wallsite-template (generated copy)"
+        direction TB
+        H[Empty /src folder]:::user
+        I[User forks / uses template]:::user
+        J[User adds own wallpapers]:::user
+        K[Deploy to<br>Vercel, Netlify<br>or Docker]:::user
+        H --> I --> J --> K
     end
 
-    F --> H;
-```
-
+    %% ------------- SYNC ARROW -------------
+    G -.->|push| H
 ---
 
 ## 🚀 Create Your Own Gallery
