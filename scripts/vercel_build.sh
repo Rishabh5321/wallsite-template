@@ -17,7 +17,7 @@ if [ -d ".vercel/cache/public/lqip" ]; then
 fi
 
 # Run the actual build command
-pnpm install --ignore-scripts && pnpm run build
+pnpm install --ignore-scripts && pnpm run build:ci
 
 # Save generated webp images and metadata to cache
 rm -rf .vercel/cache/public/webp .vercel/cache/public/lqip

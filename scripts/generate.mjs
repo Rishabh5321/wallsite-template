@@ -218,6 +218,7 @@ async function main() {
 
     await saveCache(cache);
     const outputContent = `export const galleryData = ${JSON.stringify(galleryData, null, 2)};`;
+    await fs.mkdir(path.dirname(OUTPUT_JS), { recursive: true });
     await fs.writeFile(OUTPUT_JS, outputContent);
 
     console.log('Successfully generated gallery data and images.');
