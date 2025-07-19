@@ -41,6 +41,11 @@
       "bytes": 7884,
       "imports": []
     },
+    "src/js/gallery-data.js": {
+      "bytes": 280652,
+      "imports": [],
+      "format": "esm"
+    },
     "src/js/components/state.js": {
       "bytes": 1504,
       "imports": [],
@@ -250,9 +255,9 @@
           "original": "../styles/lightbox.css"
         },
         {
-          "path": "./gallery-data.js",
+          "path": "src/js/gallery-data.js",
           "kind": "import-statement",
-          "external": true
+          "original": "./gallery-data.js"
         },
         {
           "path": "src/js/components/state.js",
@@ -295,13 +300,7 @@
   },
   "outputs": {
     "public/js/bundle.js": {
-      "imports": [
-        {
-          "path": "./gallery-data.js",
-          "kind": "require-call",
-          "external": true
-        }
-      ],
+      "imports": [],
       "exports": [],
       "entryPoint": "src/js/index.js",
       "cssBundle": "public/js/bundle.css",
@@ -327,8 +326,8 @@
         "src/styles/lightbox.css": {
           "bytesInOutput": 0
         },
-        "src/js/index.js": {
-          "bytesInOutput": 798
+        "src/js/gallery-data.js": {
+          "bytesInOutput": 225353
         },
         "src/js/components/state.js": {
           "bytesInOutput": 1074
@@ -359,9 +358,12 @@
         },
         "src/js/components/search.js": {
           "bytesInOutput": 574
+        },
+        "src/js/index.js": {
+          "bytesInOutput": 745
         }
       },
-      "bytes": 26389
+      "bytes": 251689
     },
     "public/js/bundle.css": {
       "imports": [

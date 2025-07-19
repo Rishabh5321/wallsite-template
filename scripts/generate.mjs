@@ -12,8 +12,8 @@ const __dirname = path.dirname(__filename);
 const SRC_DIR = path.resolve(__dirname, '../wallpapers');
 const WEBP_DIR = path.resolve(__dirname, '../public/webp');
 const LQIP_DIR = path.resolve(__dirname, '../public/lqip');
-const OUTPUT_JS = path.resolve(__dirname, '../public/js/gallery-data.js');
-const CACHE_FILE = path.resolve(__dirname, '../public/webp/gallery-cache.json');
+const OUTPUT_JS = path.resolve(__dirname, '../src/js/gallery-data.js');
+const CACHE_FILE = path.resolve(__dirname, 'gallery-cache.json');
 
 const IMG_EXTENSIONS = ['.png', '.jpg', '.jpeg', '.bmp', '.tiff', '.webp'];
 const RESPONSIVE_WIDTHS = [640, 1920];
@@ -218,7 +218,6 @@ async function main() {
 
     await saveCache(cache);
     const outputContent = `export const galleryData = ${JSON.stringify(galleryData, null, 2)};`;
-    await fs.mkdir(path.dirname(OUTPUT_JS), { recursive: true });
     await fs.writeFile(OUTPUT_JS, outputContent);
 
     console.log('Successfully generated gallery data and images.');
