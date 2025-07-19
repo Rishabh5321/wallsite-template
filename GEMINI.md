@@ -49,13 +49,13 @@ The Docker setup uses a single-stage `Dockerfile` with a custom `docker-entrypoi
 - `src/`: Contains the source code for the frontend application (HTML, CSS, JS). This is the directory to edit during development.
 - `public/`: The output directory for the build process. **Do not edit files here directly.**
 - `scripts/`: Contains the core generation script.
-    - `generate.mjs`: A Node.js script using `sharp` to find all images, generate responsive WebP versions, create LQIPs, extract dominant colors, and create `src/js/gallery-data.js`. It processes images in parallel and uses a cache (`gallery-cache.json`) to skip regeneration of unchanged files, making subsequent builds significantly faster.
+    - `generate.mjs`: A Node.js script using `sharp` to find all images, generate responsive WebP versions, create LQIPs, extract dominant colors, and create `public/js/gallery-data.js`. It processes images in parallel and uses a metadata cache (`public/webp/gallery-cache.json`) to skip regeneration of unchanged files, making subsequent builds significantly faster. The `gallery-data.js` file is treated as an external dependency by the build process and is loaded directly by the browser.
 - `.github/workflows/`: Contains the GitHub Actions workflows.
 - `Dockerfile` & `docker-entrypoint.sh`: Define the Docker image and its runtime behavior.
 
 ## 5. Development Rules & Conventions
 
-- **Rule 1: Never edit generated files directly.** The `public/` directory, `src/js/gallery-data.js`, and `scripts/gallery-cache.json` are generated artifacts. To update them, run `pnpm run build` or `pnpm run dev`.
+- **Rule 1: Never edit generated files directly.** The `public/` directory, `public/js/gallery-data.js`, and `public/webp/gallery-cache.json` are generated artifacts. To update them, run `pnpm run build` or `pnpm run dev`.
 - **Rule 2: The template repository is sacred.** Do not make manual changes to the `wallsite-template` repository. All changes are synced from the main `wallsite` repository.
 - **Rule 3: The user experience is paramount.** The main `README.md` is for developers and directs users to the template. The template's `README.md` provides the actual deployment steps for the user. The `README.md` in the main repository contains a quick-start GIF, an architecture diagram, and a "Contributing" section.
 - **Rule 4: Emphasize pure functions and separation of concerns.** The frontend JavaScript is organized into modules with specific responsibilities:

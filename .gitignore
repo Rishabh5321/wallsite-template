@@ -8,4 +8,5 @@ node_modules/
 gallery-generator.log
 
 # Gallery generator cache
-scripts/.gallery-cache.json
+scripts/gallery-cache.json
+public/webp/gallery-cache.json
