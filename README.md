@@ -31,7 +31,7 @@
 
   Once your site is live:
   1.  Go to this repository on GitHub.
-  2.  Navigate to the `src` folder.
+  2.  Navigate to the `wallpapers` folder.
   3.  Click **Add file** > **Upload files** and upload your wallpapers.
   4.  Commit the changes. Your site will automatically update with the new images.
   EOF
