@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+    wallsite:
+        image: ghcr.io/rishabh5321/wallsite:latest
+        ports:
+            - '8000:8000'
+        volumes:
+            # Mount a local directory for your wallpapers
+            - ./wallpapers:/app/wallpapers
+            # Mount a local directory for your cache
+            - ./app_cache:/app/public

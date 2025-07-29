@@ -1,0 +1,26 @@
+{
+	"extends": ["airbnb-base", "plugin:prettier/recommended"],
+	"ignorePatterns": ["src/js/gallery-data.js", "meta.json", "scripts/gallery-cache.json"],
+	"env": {
+		"browser": true,
+		"es2021": true
+	},
+	"parserOptions": {
+		"sourceType": "module"
+	},
+	"globals": {
+		"galleryData": "readonly"
+	},
+	"rules": {
+		"no-unused-vars": "warn",
+		"import/extensions": "off",
+		"no-use-before-define": "off",
+		"import/prefer-default-export": "off",
+		"no-plusplus": "off",
+		"no-param-reassign": "off",
+		"func-names": "off",
+		"no-console": "off",
+		"consistent-return": "error",
+		"no-implicit-globals": "error"
+	}
+}

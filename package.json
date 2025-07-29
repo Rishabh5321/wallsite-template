@@ -1,0 +1,73 @@
+{
+	"name": "wallpapers",
+	"version": "1.0.0",
+	"description": "<div align=\"center\">   <h1>Wallpaper Gallery</h1>   <p>A curated collection of stunning wallpapers, ready for one-click deployment.</p> </div>",
+	"main": "src/js/index.js",
+	"sideEffects": [
+		"src/js/index.js"
+	],
+	"directories": {
+		"doc": "src"
+	},
+	"scripts": {
+		"generate": "node ./scripts/generate.mjs ./public/gallery-data.json",
+		"dev": "pnpm run generate && esbuild src/js/index.js --bundle --outfile=public/js/bundle.js --loader:.js=jsx --loader:.css=css --allow-overwrite --servedir=public --serve=0.0.0.0:8000 --watch --target=es2020,chrome90,firefox90,safari15",
+		"build": "pnpm run generate && pnpm run build:assets && esbuild src/js/index.js --bundle --outfile=public/js/bundle.js --loader:.js=jsx --loader:.css=css --allow-overwrite --minify --target=es2020,chrome90,firefox90,safari15 --metafile=meta.json --drop:console --define:process.env.NODE_ENV='\"production\"'",
+		"start": "pnpm run build && http-server public --host 0.0.0.0 --port 8000",
+		"build:assets": "mkdir -p public/assets public/css public/js && rm -rf public/js/* public/css/* public/assets/* public/wallpapers && cp src/templates/index.html public/index.html && cp -r src/assets/* public/assets && cp -r wallpapers public/",
+		"lint": "eslint src/js/**/*.js --fix",
+		"format": "prettier --write \"src/**/*.{js,css,json,md}\"",
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"prepare": "husky",
+		"analyze": "esbuild-visualizer --metadata meta.json",
+		"lighthouse": "lhci autorun"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Rishabh5321/wallpapers.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Rishabh5321/wallpapers/issues"
+	},
+	"homepage": "https://github.com/Rishabh5321/wallpapers#readme",
+	"lint-staged": {
+		"src/**/*.{js,css,json,md}": "prettier --write",
+		"src/js/**/*.js": "eslint --fix"
+	},
+	"pnpm": {
+		"onlyBuiltDependencies": [
+			"@vercel/speed-insights",
+			"esbuild",
+			"sharp",
+			"puppeteer"
+		]
+	},
+	"dependencies": {
+		"@vercel/analytics": "^1.5.0",
+		"@vercel/speed-insights": "^1.2.0",
+		"basiclightbox": "^5.0.4",
+		"fast-glob": "^3.3.3",
+		"http-server": "^14.1.1",
+		"nearest-color": "^0.4.4"
+	},
+	"devDependencies": {
+		"@lhci/cli": "^0.15.1",
+		"concurrently": "^9.2.0",
+		"esbuild": "^0.25.6",
+		"esbuild-visualizer": "^0.7.0",
+		"eslint": "^8.57.1",
+		"eslint-config-airbnb-base": "^15.0.0",
+		"eslint-config-prettier": "^10.1.5",
+		"eslint-plugin-node": "^11.1.0",
+		"eslint-plugin-prettier": "^5.5.1",
+		"husky": "^9.1.7",
+		"lint-staged": "^16.1.2",
+		"onchange": "^7.1.0",
+		"prettier": "^3.6.2",
+		"sharp": "^0.34.3",
+		"wait-on": "^8.0.3"
+	}
+}
